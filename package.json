@@ -68,6 +68,7 @@
 		"hideCredit": true
 	},
 	"dependencies": {
-		"es-abstract": "^1.19.2"
+		"es-abstract": "^1.19.2",
+		"es-shim-unscopables": "^1.0.0"
 	}
 }
