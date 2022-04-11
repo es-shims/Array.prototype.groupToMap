@@ -66,5 +66,8 @@
 		"commitLimit": false,
 		"backfillLimit": false,
 		"hideCredit": true
+	},
+	"dependencies": {
+		"es-abstract": "^1.19.2"
 	}
 }
