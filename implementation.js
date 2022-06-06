@@ -19,7 +19,7 @@ var forEach = require('es-abstract/helpers/forEach');
 
 var AddValueToKeyedGroup = require('./AddValueToKeyedGroup'); // TODO: replace with es-abstract 2022 implementation
 
-module.exports = function groupByToMap(callbackfn) {
+module.exports = function groupToMap(callbackfn) {
 	var O = ToObject(this); // step 1
 	var len = LengthOfArrayLike(O); // step 2
 

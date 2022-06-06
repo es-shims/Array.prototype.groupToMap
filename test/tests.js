@@ -6,11 +6,11 @@ var v = require('es-value-fixtures');
 
 var hasMap = typeof Map === 'function';
 
-module.exports = function (groupByToMap, t) {
+module.exports = function (groupToMap, t) {
 	t.test('callback function', function (st) {
 		forEach(v.nonFunctions, function (nonFunction) {
 			st['throws'](
-				function () { groupByToMap([], nonFunction); },
+				function () { groupToMap([], nonFunction); },
 				TypeError,
 				inspect(nonFunction) + ' is not a function'
 			);
@@ -21,7 +21,7 @@ module.exports = function (groupByToMap, t) {
 
 	t.test('no Maps', { skip: hasMap }, function (st) {
 		st['throws'](
-			function () { groupByToMap([], Boolean); },
+			function () { groupToMap([], Boolean); },
 			SyntaxError,
 			'Maps are not supported'
 		);
@@ -31,7 +31,7 @@ module.exports = function (groupByToMap, t) {
 
 	t.test('grouping', { skip: !hasMap }, function (st) {
 		st.deepEqual(
-			groupByToMap([], function () { return 'a'; }),
+			groupToMap([], function () { return 'a'; }),
 			new Map(),
 			'an empty array produces an empty Map'
 		);
@@ -61,14 +61,14 @@ module.exports = function (groupByToMap, t) {
 			[RegExp, [/a/g]]
 		]);
 		st.deepEqual(
-			groupByToMap(arr, parity),
+			groupToMap(arr, parity),
 			grouped,
 			inspect(arr) + ' group by parity groups to ' + inspect(grouped)
 		);
 
 		var sentinel = {};
 		st.deepEqual(
-			groupByToMap(arr, function (x, i, a) {
+			groupToMap(arr, function (x, i, a) {
 				st.equal(this, sentinel, 'receiver is as expected'); // eslint-disable-line no-invalid-this
 				st.equal(x, arr[i], 'second argument ' + i + ' is ' + inspect(arr[i]));
 				st.equal(a, arr, 'third argument is array');

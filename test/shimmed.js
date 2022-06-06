@@ -13,15 +13,15 @@ var isEnumerable = Object.prototype.propertyIsEnumerable;
 var runTests = require('./tests');
 
 test('shimmed', function (t) {
-	var fn = Array.prototype.groupByToMap;
-	t.equal(fn.length, 1, 'Array#groupByToMap has a length of 1');
+	var fn = Array.prototype.groupToMap;
+	t.equal(fn.length, 1, 'Array#groupToMap has a length of 1');
 	t.test('Function name', { skip: !functionsHaveNames }, function (st) {
-		st.equal(fn.name, 'groupByToMap', 'Array#groupByToMap has name "groupByToMap"');
+		st.equal(fn.name, 'groupToMap', 'Array#groupToMap has name "groupToMap"');
 		st.end();
 	});
 
 	t.test('enumerability', { skip: !defineProperties.supportsDescriptors }, function (et) {
-		et.equal(false, isEnumerable.call(Array.prototype, 'groupByToMap'), 'Array#groupByToMap is not enumerable');
+		et.equal(false, isEnumerable.call(Array.prototype, 'groupToMap'), 'Array#groupToMap is not enumerable');
 		et.end();
 	});
 

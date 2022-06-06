@@ -10,11 +10,11 @@ module.exports = function shim() {
 
 	define(
 		Array.prototype,
-		{ groupByToMap: polyfill },
-		{ groupByToMap: function () { return Array.prototype.groupByToMap !== polyfill; } }
+		{ groupToMap: polyfill },
+		{ groupToMap: function () { return Array.prototype.groupToMap !== polyfill; } }
 	);
 
-	shimUnscopables('groupByToMap');
+	shimUnscopables('groupToMap');
 
 	return polyfill;
 };
