@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
-- [Breaking] rename package/repo to `array.prototype.grouptomap` [`05de0bb`](https://github.com/es-shims/Array.prototype.groupByToMap/commit/05de0bba72e652adba92fc4b0b1d3f3affd8a802)
+- [Breaking] rename package/repo to `array.prototype.grouptomap` [`2c47ed4`](https://github.com/es-shims/Array.prototype.groupByToMap/commit/2c47ed40a8d7aec5c9dc8b7eedfe145ff0b623da)
 
 ## [v1.1.0](https://github.com/es-shims/Array.prototype.groupByToMap/compare/v1.0.0...v1.1.0) - 2022-04-11
 
