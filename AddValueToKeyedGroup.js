@@ -2,9 +2,9 @@
 
 var callBound = require('call-bind/callBound');
 var GetIntrinsic = require('get-intrinsic');
-var SameValue = require('es-abstract/2021/SameValue');
+var SameValue = require('es-abstract/2022/SameValue');
 
-var $TypeError = GetIntrinsic('%TypeError%'); // eslint-disable-line new-cap
+var $TypeError = GetIntrinsic('%TypeError%');
 
 var $filter = callBound('Array.prototype.filter');
 var $push = callBound('Array.prototype.push');
@@ -20,7 +20,7 @@ module.exports = function AddValueToKeyedGroup(groups, key, value) {
 		}
 		$push(g.Elements, value);
 	} else {
-		var group = { Key: key, Elements: [value] }; // eslint-disable-line sort-keys
+		var group = { Key: key, Elements: [value] };
 		$push(groups, group);
 	}
 };
