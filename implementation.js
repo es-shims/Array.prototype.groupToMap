@@ -10,8 +10,8 @@ var LengthOfArrayLike = require('es-abstract/2023/LengthOfArrayLike');
 var ToObject = require('es-abstract/2023/ToObject');
 var ToString = require('es-abstract/2023/ToString');
 
-var $SyntaxError = GetIntrinsic('%SyntaxError%');
-var $TypeError = GetIntrinsic('%TypeError%');
+var $SyntaxError = require('es-errors/syntax');
+var $TypeError = require('es-errors/type');
 var $Map = GetIntrinsic('%Map%', true);
 var $set = callBound('%Map.prototype.set%', true);
 
