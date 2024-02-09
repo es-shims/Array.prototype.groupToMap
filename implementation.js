@@ -1,59 +1,13 @@
 'use strict';
 
-var GetIntrinsic = require('get-intrinsic');
-var callBound = require('call-bind/callBound');
-
-var Call = require('es-abstract/2023/Call');
-var Get = require('es-abstract/2023/Get');
-var IsCallable = require('es-abstract/2023/IsCallable');
-var LengthOfArrayLike = require('es-abstract/2023/LengthOfArrayLike');
-var ToObject = require('es-abstract/2023/ToObject');
-var ToString = require('es-abstract/2023/ToString');
-
-var $SyntaxError = require('es-errors/syntax');
-var $TypeError = require('es-errors/type');
-var $Map = GetIntrinsic('%Map%', true);
-var $set = callBound('%Map.prototype.set%', true);
-
-var forEach = require('es-abstract/helpers/forEach');
-
-var AddValueToKeyedGroup = require('./aos/AddValueToKeyedGroup'); // TODO: replace with es-abstract 2024 implementation
+var callBind = require('call-bind');
+var groupBy = require('map.groupby');
 
 module.exports = function groupToMap(callbackfn) {
-	var O = ToObject(this); // step 1
-	var len = LengthOfArrayLike(O); // step 2
-
-	if (!IsCallable(callbackfn)) {
-		throw new $TypeError('callbackfn must be a function'); // step 3
-	}
-
-	if (!$Map) {
-		throw new $SyntaxError('This environment does not support Maps');
-	}
-
-	var thisArg;
-	if (arguments.length > 1) {
-		thisArg = arguments[1];
-	}
-
-	var k = 0; // step 4
-	var groups = []; // step 5
-	while (k < len) { // step 6
-		var Pk = ToString(k);
-		var kValue = Get(O, Pk);
-		var key = Call(callbackfn, thisArg, [kValue, k, O]);
-		if (key === 0) {
-			key = 0; // step 6.d.
-		}
-		AddValueToKeyedGroup(groups, key, kValue);
-		k += 1;
-	}
-
-	var map = new $Map(); // Construct($Map); // step 7
-	forEach(groups, function (g) { // step 8
-		// var elements = CreateArrayFromList(g.Elements);
-		$set(map, g.Key, g.Elements);
+	var thisArg = arguments.length > 0 ? arguments[1] : this;
+	var cb = callBind(callbackfn, thisArg);
+	var self = this;
+	return groupBy(this, function (k, v) {
+		return cb(k, v, self);
 	});
-
-	return map; // step 9
 };

@@ -3,8 +3,7 @@
 var inspect = require('object-inspect');
 var forEach = require('for-each');
 var v = require('es-value-fixtures');
-
-var hasMap = typeof Map === 'function';
+var $Map = require('es-map/polyfill')();
 
 module.exports = function (groupToMap, t) {
 	t.test('callback function', function (st) {
@@ -19,7 +18,7 @@ module.exports = function (groupToMap, t) {
 		st.end();
 	});
 
-	t.test('no Maps', { skip: hasMap }, function (st) {
+	t.test('no Maps', { skip: $Map }, function (st) {
 		st['throws'](
 			function () { groupToMap([], Boolean); },
 			SyntaxError,
@@ -29,10 +28,10 @@ module.exports = function (groupToMap, t) {
 		st.end();
 	});
 
-	t.test('grouping', { skip: !hasMap }, function (st) {
+	t.test('grouping', { skip: !$Map }, function (st) {
 		st.deepEqual(
 			groupToMap([], function () { return 'a'; }),
-			new Map(),
+			new $Map(),
 			'an empty array produces an empty Map'
 		);
 
@@ -49,7 +48,7 @@ module.exports = function (groupToMap, t) {
 			}
 			return x % 2 === 0 ? 'even' : 'odd';
 		};
-		var grouped = new Map([
+		var grouped = new $Map([
 			[0, [0, -0]],
 			['even', [2, 4]],
 			['odd', [1, 3, 5]],
@@ -74,7 +73,7 @@ module.exports = function (groupToMap, t) {
 				st.equal(a, arr, 'third argument is array');
 				return 42;
 			}, sentinel),
-			new Map([[42, arr]]),
+			new $Map([[42, arr]]),
 			'thisArg and callback arguments are as expected'
 		);
 
