@@ -17,7 +17,7 @@ var $set = callBound('%Map.prototype.set%', true);
 
 var forEach = require('es-abstract/helpers/forEach');
 
-var AddValueToKeyedGroup = require('./AddValueToKeyedGroup'); // TODO: replace with es-abstract 2022 implementation
+var AddValueToKeyedGroup = require('./aos/AddValueToKeyedGroup'); // TODO: replace with es-abstract 2024 implementation
 
 module.exports = function groupToMap(callbackfn) {
 	var O = ToObject(this); // step 1
